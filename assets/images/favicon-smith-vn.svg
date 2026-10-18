@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SmithOptics VN">
+  <rect width="512" height="512" rx="72" fill="#fff"/>
+  <path d="M88 166h336v48H88zm0 66h336v48H88zm0 66h336v48H88z" fill="#111"/>
+  <path d="M88 166l92 57-92 57zm336 180l-92-57 92-57z" fill="#fff"/>
+</svg>

@@ -1,0 +1,2 @@
+customElements.get("vto-modal")||customElements.define("vto-modal",class extends ModalDialog{constructor(){super(),this.iframe=this.querySelector("#vto-iframe")}connectedCallback(){this.moved||(super.removeAllOthers(),super.connectedCallback())}hide(){super.hide()}show(opener){super.show(opener);var currentURL=this.iframe.getAttribute("src"),newURL=this.openedBy.getAttribute("data-url");currentURL!==newURL&&this.iframe.setAttribute("src",newURL)}});
+//# sourceMappingURL=/cdn/shop/t/401/assets/vto-modal.js.map?v=134649105953560446971788382342

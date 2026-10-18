@@ -1,0 +1,273 @@
+variant-selects {
+  display: block;
+}
+
+.product--no-media .product-form__input--pill,
+.product--no-media .product-form__input--swatch,
+.product--no-media .product-form__input--dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.product--no-media .product-form__input.product-form__input--pill,
+.product--no-media .product-form__input.product-form__input--swatch {
+  flex-wrap: wrap;
+  margin: 0 auto 1.2rem auto;
+}
+
+.product--no-media .product-form__input--dropdown {
+  flex-direction: column;
+  max-width: 100%;
+}
+
+:is(.product-form__input--pill, .product-form__input--swatch) .form__label {
+  margin-bottom: 0.8rem;
+}
+
+.product-form__input input[type='radio'] {
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.product-form__input input[type='radio']:not(.disabled):not(.visually-disabled) + label > .label-unavailable {
+  display: none;
+}
+
+.product-form__input--dropdown {
+  --swatch-input--size: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.product-form__input--dropdown .dropdown-swatch + select {
+  padding-left: calc(2.4rem + var(--swatch-input--size));
+}
+
+.product-form__input--dropdown .dropdown-swatch {
+  position: absolute;
+  left: 1.6rem;
+  top: calc(50% - var(--swatch-input--size) / 2);
+  width: var(--swatch-input--size);
+  height: var(--swatch-input--size);
+  z-index: 1;
+}
+
+/* Custom styles for Pill display type */
+.product-form__input--pill {
+  --variant-pills-radius: 0;
+}
+.product-form__input--pill input[type='radio'] + label {
+  border: var(--variant-pills-border-width) solid color-mix(in srgb, var(--color-black), transparent 95%);
+  background-color: var(--color-grey);
+  color: rgba(var(--color-foreground));
+  border-radius: var(--variant-pills-radius);
+  color: rgb(var(--color-foreground));
+  display: inline-block;
+  margin: 0.7rem 0.5rem 0.2rem 0;
+  padding: 1.2rem 2rem;
+  font-size: var(--text-sm);
+  line-height: 1;
+  text-align: center;
+  transition: border var(--duration-short) ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-form__input--pill input[type='radio'] + label:before {
+  content: '';
+  position: absolute;
+  top: calc(var(--variant-pills-border-width) * -1);
+  right: calc(var(--variant-pills-border-width) * -1);
+  bottom: calc(var(--variant-pills-border-width) * -1);
+  left: calc(var(--variant-pills-border-width) * -1);
+  z-index: -1;
+  border-radius: var(--variant-pills-radius);
+  box-shadow: var(--variant-pills-shadow-horizontal-offset) var(--variant-pills-shadow-vertical-offset) var(--variant-pills-shadow-blur-radius) rgba(var(--color-shadow), var(--variant-pills-shadow-opacity));
+}
+
+.product-form__input--pill input[type='radio']:checked + label,
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: var(--color-black);
+  box-shadow: inset 0 0 0 0.05rem var(--color-black);
+}
+
+@media screen and (forced-colors: active) {
+  .product-form__input--pill input[type='radio']:checked + label {
+    text-decoration: underline;
+  }
+
+  .product-form__input--pill input[type='radio']:focus-visible + label {
+    outline: transparent solid 1px;
+    outline-offset: 2px;
+  }
+}
+
+.product-form__input--pill input[type='radio']:checked + label::selection {
+  background-color: rgba(var(--color-background), 0.3);
+}
+
+.product-form__input--pill input[type='radio']:disabled + label,
+.product-form__input--pill input[type='radio'].disabled + label {
+  text-decoration: line-through;
+}
+
+.product-form__input--pill input[type='radio']:focus-visible + label {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
+}
+
+/* Hide combined listings selector if only one selection is present */
+.product-form__input--pill:has(input[type="radio"]:only-of-type) {
+  display: none;
+}
+
+/* Fallback */
+.product-form__input--pill input[type='radio'].focused + label {
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
+}
+
+/* Custom styles for Swatch display type */
+.product-form__input--swatch {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.8rem;
+  width: 100%;
+
+  .picker-modal-trigger button {
+    --swatch-input--size: 4.5rem;
+    display: block;
+    width: var(--swatch-input--size);
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    margin: .7rem 1.2rem .2rem 0;
+    border-radius: 0;
+    border-width: 1px;
+    font-size: 1rem;
+    padding: 0;
+    min-height: unset;
+    min-width: unset;
+    border-radius: 100%;
+    letter-spacing: 1px;
+    line-height: 1;
+
+    &::after {
+      border-radius: 100%;
+    }
+  }
+
+  &.swatch-size-lg .picker-modal-trigger button {
+    font-size: 1.4rem;
+    --swatch-input--size: 6rem;
+  }
+
+  @media screen and (max-width: 1199px) {
+
+    &.swatch-size-lg {
+      .picker-modal-trigger.pos-6 {
+        display: none;
+      }
+
+      /* Hide swatches beyond the "View All" button (position 4 and beyond) */
+      .picker-modal-trigger.pos-4 ~ .swatch-input__input:not(:checked) {
+        display: none;
+        & + .swatch-input__label {
+          display: none;
+        }
+      }
+
+      /* If swatch beyond "View All" is selected, show it as the third swatch */
+      &:has(> .picker-modal-trigger.pos-4 ~ .swatch-input__input:checked) {
+        .swatch-input__input,
+        .swatch-input__label {
+          &[data-index="1"] {
+            order: -3;
+          }
+          &[data-index="2"] {
+            order: -2;
+          }
+          &[data-index="3"] {
+            display: none
+          }
+        }
+
+        .picker-modal-trigger.pos-4 ~ .swatch-input__input:checked {
+          order: -1;
+          & + .swatch-input__label {
+            order: -1;
+          }
+        }
+      }
+    }
+
+    &:not(.swatch-size-lg) {
+      .picker-modal-trigger.pos-4 {
+        display: none;
+      }
+
+      /* Hide swatches beyond the "View All" button (position 6 and beyond) */
+      .picker-modal-trigger.pos-6 ~ .swatch-input__input:not(:checked) {
+        display: none;
+        & + .swatch-input__label {
+          display: none;
+        }
+      }
+
+      /* If swatch beyond "View All" is selected, show it as the third swatch */
+      &:has(> .picker-modal-trigger.pos-6 ~ .swatch-input__input:checked) {
+        .swatch-input__input,
+        .swatch-input__label {
+          &[data-index="1"] {
+            order: -6;
+          }
+          &[data-index="2"] {
+            order: -5;
+          }
+          &[data-index="3"] {
+            order: -4;
+          }
+          &[data-index="4"] {
+            order: -3;
+          }
+          &[data-index="5"] {
+            order: -2;
+          }
+          &[data-index="6"] {
+            display: none
+          }
+        }
+
+        .picker-modal-trigger.pos-6 ~ .swatch-input__input:checked {
+          order: -1;
+          & + .swatch-input__label {
+            order: -1;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .picker-modal-trigger {
+      display: none
+    }
+  }
+}
+
+.product-form__input--swatch {
+  .swatch-input__input + .swatch-input__label {
+    --swatch-input--size: 8.2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  &.swatch-size-lg .swatch-input__input + .swatch-input__label {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+    letter-spacing: var(--text-sm--letter-spacing);
+    --swatch-input--size: 8.2rem;
+  }
+}
+/* End custom styles for Swatch display type */

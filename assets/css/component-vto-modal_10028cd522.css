@@ -1,0 +1,20 @@
+.vto-modal {
+  iframe {
+    width: 100%;
+    min-height: 85vh;
+  }
+
+  .modal__content {
+    width: clamp(350px, 100%, 1500px);
+    max-width: calc(100% - 3rem);
+    min-height: 85vh;
+    overflow: hidden;
+    border: none;
+    border-radius: 1.6rem;
+  }
+
+  .modal__toggle {
+    top: 1.4rem;
+    right: 1.4rem;
+  }
+}

@@ -1,0 +1,33 @@
+.product__virtual-try-on {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  position: relative;
+
+  .modal-opener {
+    width: 100%;
+  }
+}
+
+.vto-button {
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-card-background));
+  padding: 0.4rem 1.3rem;
+  font-size: 1.4rem;
+  border-radius: 3.2rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  width: 100%;
+  justify-content: center;
+
+  svg {
+    display: inline-block;
+    height: 2rem;
+    width: 3.6rem;
+    margin-right: 0.5rem;
+  }
+}

@@ -1,0 +1,24 @@
+# Local WordPress, generated data, and developer artifacts
+wp-config.php
+wp-config-local.php
+.env
+.env.*
+!.env.example
+*.bak
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.codex-home-*.png
+.codex-mobile-*.png
+responsive-bobcat-*.png
+screenshot.png
+assets/products_cache/
+test-results/
+playwright-report/
+coverage/
+audit/
+tests/
+tools/
+*.pdf
+snapshots/*.html

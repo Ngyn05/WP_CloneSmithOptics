@@ -1,0 +1,137 @@
+.product-features {
+  display: grid;
+  padding: 1rem;
+  background: rgb(var(--color-card-background));
+
+  .product-features__block {
+    color: rgb(var(--color-foreground));
+    margin-bottom: 0;
+
+    .accordion-toggle {
+      color: rgb(var(--color-foreground));
+    }
+
+    &:first-child {
+      padding-left: 0;
+
+      .accordion-toggle {
+        border-top: 0;
+        padding-top: 0;
+      }
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      .accordion-toggle {
+        padding-bottom: 0;
+      }
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.5;
+      color: rgb(var(--color-foreground));
+      margin-top: 0;
+    }
+  }
+
+  .product-features__block-title {
+    height: 40px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .product-features__block .accordion-toggle {
+      font-weight: 600;
+      font-size: 1.6rem;
+      margin-bottom: 0;
+      text-transform: none;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 1.6rem 3.2rem;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: 1fr;
+
+    .product-features__block {
+      padding: 0 2.4rem;
+
+      &:not(:last-child) {
+        border-right: 0.1rem solid rgb(var(--color-horizontal-rule));
+      }
+    }
+  }
+}
+
+.product-features__for {
+  .product-features__block-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    .best-for-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      img {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+}
+
+.product-features__fit {
+  .fit-icon-group {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding: 2rem 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      opacity: 0.6;
+      width: min-content;
+      padding: 0 6px;
+
+      span {
+        text-align: center;
+        margin-top: 0.6rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: 0px;
+        word-spacing: 2rem;
+      }
+    }
+
+    li.selected {
+      opacity: 1;
+    }
+  }
+}
+
+.product-features__tech {
+  .product-features__block-content {
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    max-width: calc(100% - 3rem);
+  }
+
+  .svg-wrapper {
+    margin-left: 1rem;
+  }
+}

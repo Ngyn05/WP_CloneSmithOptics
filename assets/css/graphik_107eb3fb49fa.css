@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Graphik';
+  src: local('Graphik Regular'), local('Graphik-Regular'),
+  url('/assets/fonts/Graphik-Regular_cbe1db55b70d.woff2') format('woff2'),
+  url('/assets/fonts/Graphik-Regular_8fde87f36e5a.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  src: local('Graphik Semibold'), local('Graphik-Semibold'),
+  url('/assets/fonts/Graphik-Semibold_b3ce14d55eb3.woff2') format('woff2'),
+  url('/assets/fonts/Graphik-Semibold_62d8a9c8768f.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

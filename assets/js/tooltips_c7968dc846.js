@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(){initTooltips()});function initTooltips(){typeof tippy<"u"&&tippy("[data-tooltip]",{content(reference){return reference.getAttribute("data-tooltip")},interactive:!0,appendTo:()=>document.body})}function destroyTooltips(){tippy("[data-tooltip]").forEach(instance=>instance.destroy())}function reinitTooltips(){destroyTooltips(),initTooltips()}document.addEventListener("reinit-tooltips",()=>{reinitTooltips()});
+//# sourceMappingURL=/cdn/shop/t/401/assets/tooltips.js.map?v=141814229618329042171788382344

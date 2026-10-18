@@ -1,0 +1,1486 @@
+/*
+Theme Name: Smith Optics
+Theme URI: https://www.smithoptics.com
+Author: Antigravity Team
+Author URI: https://www.smithoptics.com
+Description: Official high-performance eCommerce WordPress Theme cloned directly from Smith Optics US. Fully responsive, WooCommerce ready, with full interactive mega-menu, collection filters, and instant local product catalog.
+Version: 2.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: smith-optics
+Tags: e-commerce, woocommerce, responsive-layout, custom-menu, featured-images, full-width-template
+*/
+
+/* Homepage hero is static. Suppress any carousel controls injected by the
+   captured storefront runtime and clip their half-circles at both edges. */
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7,
+.main-index #Banner-template--23416234311918__image_banner_VhDAd7 {
+    overflow: hidden !important;
+}
+
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7 button,
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7 .slick-arrow,
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7 .slider-button,
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7 [class*="carousel-arrow"],
+.main-index #shopify-section-template--23416234311918__image_banner_VhDAd7 [class*="swiper-button"] {
+    display: none !important;
+}
+
+/* Do not allow stale Boost carousel controls to float over the homepage hero. */
+.main-index .smith-original-trending .boost-sd__prev-button,
+.main-index .smith-original-trending .boost-sd__next-button,
+.main-index .smith-original-trending .boost-sd__slider-button,
+.main-index > .boost-sd__prev-button,
+.main-index > .boost-sd__next-button,
+.main-index > .boost-sd__slider-button {
+    display: none !important;
+}
+
+/*
+ * Collection snapshot repair
+ *
+ * Some captured Boost collection pages omit part of Boost's base CSS. The
+ * remaining tooltip rule then resolves to height:100%, making every filter
+ * heading as tall as the complete product grid. The goggles snapshot also
+ * misses the flex rules for the product list itself.
+ */
+.boost-sd__filter-product-list .boost-sd__filter-option-title,
+.boost-sd__filter-product-list .boost-sd__tooltip--filter-tree {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.boost-sd__filter-product-list .boost-sd__tooltip--filter-tree {
+  align-items: center !important;
+}
+
+.boost-sd__filter-product-list .boost-sd__product-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.boost-sd__filter-product-list .boost-sd__product-item {
+  height: auto !important;
+  min-height: 0 !important;
+  position: relative;
+}
+
+@media screen and (min-width: 992px) {
+  .boost-sd__filter-product-list .boost-sd-layout {
+    align-items: flex-start !important;
+  }
+
+  .boost-sd__filter-product-list .boost-sd-left {
+    align-self: flex-start !important;
+    height: auto !important;
+  }
+
+  .boost-sd__filter-product-list .boost-sd__filter-tree-vertical,
+  .boost-sd__filter-product-list .boost-sd__filter-tree-vertical-content {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .boost-sd__filter-product-list .boost-sd__product-list-grid--3-col > .boost-sd__product-item {
+    width: calc(33.333333% - var(--boostsd-product-list-gap-desktop, 8px)) !important;
+    margin-right: calc(var(--boostsd-product-list-gap-desktop, 8px) * .5) !important;
+    margin-bottom: var(--boostsd-product-item-margin-bottom-desktop, 8px) !important;
+    margin-left: calc(var(--boostsd-product-list-gap-desktop, 8px) * .5) !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .boost-sd__filter-product-list .boost-sd__product-list-grid--3-col > .boost-sd__product-item {
+    width: calc(50% - var(--boostsd-product-list-gap-mobile, 8px)) !important;
+    margin-right: calc(var(--boostsd-product-list-gap-mobile, 8px) * .5) !important;
+    margin-bottom: var(--boostsd-product-item-margin-bottom-mobile, 8px) !important;
+    margin-left: calc(var(--boostsd-product-list-gap-mobile, 8px) * .5) !important;
+  }
+}
+
+/* ==========================================================================
+   Vietnamese Typography System (Plus Jakarta Sans & Inter)
+   100% Full Diacritic & Unicode Support for Vietnamese
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --font-body--family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --font-heading--family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --font-body-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --font-heading-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --boostsd-product-title-font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  --boostsd-filter-option-title-font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.smith-page-title {
+  width: min(100% - 32px, 1200px);
+  margin: 32px auto 20px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+
+/* Các slider snapshot đặt slide kế tiếp ngoài viewport. Chặn phần dư ngang ở
+   cấp tài liệu nhưng giữ nguyên cuộn ngang cục bộ của slider và bộ lọc. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+html, body, div, p, span, a, h1, h2, h3, h4, h5, h6, input, button, select, textarea, label, li, ul, ol, table, th, td {
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+@media screen and (max-width: 749px) {
+  .smith-product-source-snapshot .slider-progress--pdp,
+  .smith-unified-pdp .slider-progress--pdp {
+    position: relative;
+    height: 18px !important;
+    cursor: ew-resize;
+    touch-action: none;
+    background: transparent !important;
+  }
+  .smith-product-source-snapshot .slider-progress--pdp::before,
+  .smith-unified-pdp .slider-progress--pdp::before {
+    content: "";
+    position: absolute;
+    inset: 7px 0;
+    background: #cfcfcf;
+  }
+  .smith-product-source-snapshot .slider-progress--pdp .slider-progress__bar,
+  .smith-unified-pdp .slider-progress--pdp .slider-progress__bar {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 4px !important;
+    margin-top: 7px;
+    background: #181818;
+    pointer-events: none;
+  }
+  .smith-product-source-snapshot .slider-progress--pdp:focus-visible,
+  .smith-unified-pdp .slider-progress--pdp:focus-visible {
+    outline: 2px solid #181818;
+    outline-offset: 2px;
+  }
+}
+
+/* These Boost facets are intentionally unavailable on every local collection. */
+.smith-source-snapshot .boost-sd__filter-option[data-filteroptionid*="price_range"],
+.smith-source-snapshot .boost-sd__filter-option[data-filteroptionid*="review_rating"],
+.smith-source-snapshot [id="pf_p_price_range"],
+.smith-source-snapshot [id="pf_r_review_ratings"] {
+    display: none !important;
+}
+
+/* Product-fact SVG files lose their utility sizing when Shopify JS is removed. */
+.smith-product-source-snapshot .product-facts__icon {
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+}
+.smith-product-source-snapshot .product-facts__icon-img,
+.smith-product-source-snapshot .product-facts__icon img,
+.smith-product-source-snapshot .product-facts__icon svg {
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+}
+
+/* Restore compact PDP utility-icon sizing without Shopify's utility runtime. */
+.smith-product-source-snapshot [id^="light-conditions-"] img {
+    display: block !important;
+    width: auto !important;
+    height: 20px !important;
+    max-width: 40px !important;
+    max-height: 20px !important;
+}
+
+.smith-product-source-snapshot .swatch.smith-swatch-fallback {
+    background: var(--swatch--background) !important;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
+}
+
+/* Keep unavailable variants visually readable. Availability is still enforced
+   by the disabled input; only the grey veil and diagonal strike are removed. */
+.smith-product-source-snapshot .swatch-input__label > .swatch::before,
+.smith-source-snapshot product-card input[type="radio"].visually-disabled + label > .swatch {
+    opacity: 1 !important;
+}
+
+.smith-product-source-snapshot .swatch-input__label > .swatch::after,
+.smith-source-snapshot product-card input[type="radio"].visually-disabled + label > .swatch::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Apply the same clear-thumbnail treatment to every product surface. */
+.smith-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch,
+.smith-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch::before,
+.smith-source-snapshot .picker-modal input[type="radio"].visually-disabled + .picker-modal_option .picker-modal_option-content,
+.smith-product-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch,
+.smith-product-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch::before {
+    opacity: 1 !important;
+}
+
+.smith-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch::after,
+.smith-source-snapshot .picker-modal input[type="radio"].visually-disabled + .picker-modal_option .swatch::after,
+.smith-product-source-snapshot :is(input[type="radio"]:disabled, input[type="radio"].disabled, input[type="radio"].visually-disabled) + label > .swatch::after {
+    content: none !important;
+    display: none !important;
+}
+.smith-product-source-snapshot .product__info-wrapper ul.flex li[data-tooltip] > div {
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+}
+.smith-product-source-snapshot .product__info-wrapper ul.flex li[data-tooltip] img {
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    object-fit: contain !important;
+}
+
+@media screen and (min-width: 750px) {
+    .smith-product-source-snapshot .product__media-list {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .smith-product-source-snapshot .product__media-item--desktop-featured {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: none !important;
+        flex: 0 0 100% !important;
+    }
+}
+
+/* Khoảng 750–991px là tablet: snapshot gốc vẫn áp kích thước carousel 80%,
+   khiến ảnh chính và nội dung bên phải trông như bị cắt. */
+@media screen and (min-width: 750px) and (max-width: 1199px) {
+    .smith-product-source-snapshot .product .product__media-list .product__media-item--desktop-featured,
+    .smith-product-source-snapshot .product .product__media-list .product__media-item--desktop-featured .product__media,
+    .smith-product-source-snapshot .product .product__media-list .product__media-item--desktop-featured img {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .smith-product-source-snapshot .image-with-text__heading.type-preset--h1 {
+        max-width: 100% !important;
+        font-size: clamp(32px, 5vw, 44px) !important;
+        line-height: 1.08 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .smith-product-source-snapshot .boost-sd__recommendation-title-text {
+        font-size: clamp(28px, 4.5vw, 40px) !important;
+        line-height: 1.15 !important;
+    }
+}
+
+/* Keep the product review empty state centered beneath Trending Products. */
+.smith-product-source-snapshot reviewsio-product-reviews-widget {
+    display: none !important;
+}
+.smith-product-reviews-placeholder {
+    box-sizing: border-box;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 48px auto 56px;
+    padding-bottom: 54px;
+    border-bottom: 1px solid #d6d6d6;
+    text-align: center;
+}
+.smith-product-reviews-placeholder p {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+}
+.smith-product-reviews-placeholder button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 0;
+    background: #181818;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+    .smith-product-reviews-placeholder {
+        width: calc(100% - 30px);
+        margin-top: 32px;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+    }
+    .smith-product-reviews-placeholder p {
+        font-size: 14px;
+    }
+}
+.smith-product-source-snapshot reviewsio-product-reviews-widget,
+.smith-product-source-snapshot reviewsio-product-reviews-widget .ElementsWidget,
+.smith-product-source-snapshot reviewsio-product-reviews-widget .ElementsWidget__inner {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.smith-product-source-snapshot reviewsio-product-reviews-widget .ElementsWidget__list,
+.smith-product-source-snapshot reviewsio-product-reviews-widget .ElementsWidget__list > .u-textCenter--all {
+    width: 100% !important;
+    text-align: center !important;
+}
+.smith-product-source-snapshot reviewsio-product-reviews-widget .ElementsWidget__list > .u-textCenter--all {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+.smith-product-source-snapshot reviewsio-product-reviews-widget [aria-label="Be the first to write a review"],
+.smith-product-source-snapshot reviewsio-product-reviews-widget [aria-label="Hãy là người đầu tiên gửi đánh giá"] {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Product artwork must remain fully visible inside every Trending card. */
+.smith-original-trending .boost-sd__product-image-wrapper,
+.smith-original-trending .boost-sd__product-image {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+.smith-original-trending .boost-sd__product-image-img,
+.smith-original-trending .boost-sd__product-image-img--main {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+
+body.market-us,
+body.market-us button,
+body.market-us input,
+body.market-us select,
+body.market-us textarea {
+    font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* WordPress Core Styling & Render Fixes */
+html, body {
+    margin: 0;
+    padding: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #ffffff !important;
+}
+
+/* Ensure images scale responsively */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* About page timeline: keep each absolutely positioned image inside its media
+   panel. The generic responsive image rule above otherwise restores the
+   intrinsic image height, letting tall images cover the neighbouring rows. */
+#shopify-section-template--23416236474606__multirow_mFTwag .image-with-text__media,
+#shopify-section-template--23416235950318__multirow_XAXnR6 .image-with-text__media {
+    overflow: hidden !important;
+}
+
+#shopify-section-template--23416236474606__multirow_mFTwag .image-with-text__media img,
+#shopify-section-template--23416235950318__multirow_XAXnR6 .image-with-text__media img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+/* Reviews.io normally adds an R-MD class with its remote JavaScript. The local
+   snapshot is static, so reproduce that compact layout on small screens. */
+@media screen and (max-width: 749px) {
+    .smith-page-source-snapshot--reviews .CarouselWidget__inner {
+        flex-direction: column !important;
+    }
+
+    .smith-page-source-snapshot--reviews .CarouselWidget__header,
+    .smith-page-source-snapshot--reviews .CarouselWidget__list {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+    }
+
+    .smith-page-source-snapshot--reviews .CarouselWidget__header {
+        margin-bottom: 20px !important;
+        padding: 0 48px !important;
+    }
+
+    .smith-page-source-snapshot--reviews .R-ReviewList-container {
+        width: 100% !important;
+        margin-inline: 0 !important;
+    }
+
+    .smith-page-source-snapshot--reviews .R-ReviewList__item {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* The captured Reviews.io UGC widget does not include its remote gallery CSS.
+   Present it as a compact, swipeable media rail instead of 50 full-size rows. */
+.smith-page-source-snapshot--reviews .MediaGalleryWidget,
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__inner,
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__list-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+}
+
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__list {
+    display: flex !important;
+    gap: 12px !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+}
+
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__item {
+    position: relative !important;
+    flex: 0 0 calc((100% - 36px) / 4) !important;
+    width: calc((100% - 36px) / 4) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden !important;
+    scroll-snap-align: start;
+}
+
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__media,
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__media .media__container,
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__media .media__source {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__media .media__source {
+    object-fit: cover !important;
+}
+
+.smith-page-source-snapshot--reviews .MediaGalleryWidget__scrollButton {
+    display: none !important;
+}
+
+@media screen and (max-width: 749px) {
+    .smith-page-source-snapshot--reviews .MediaGalleryWidget__item {
+        flex-basis: 82% !important;
+        width: 82% !important;
+    }
+}
+
+/* Keep the home campaign rows in normal document flow at every browser zoom. */
+.main-index [id$="__multirow_UUdtmU"],
+.main-index [id$="__multirow_UUdtmU"] .multirow,
+.main-index [id$="__multirow_UUdtmU"] .multirow__inner {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+}
+
+.main-index [id$="__multirow_UUdtmU"] .multirow__inner {
+    display: flex !important;
+    flex-flow: column nowrap !important;
+}
+
+.main-index [id$="__multirow_UUdtmU"] .image-with-text {
+    position: relative !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.main-index [id$="__featured_article_hydqEF"] {
+    position: relative !important;
+    clear: both !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.main-index [id$="__featured_article_hydqEF"] > .featured-article > .page-width {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+    padding-inline: 5vw !important;
+}
+
+@media screen and (min-width: 1200px) {
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text,
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__grid,
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__media,
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__content {
+        height: 460px !important;
+        min-height: 460px !important;
+        max-height: 460px !important;
+    }
+
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__grid {
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        width: 100% !important;
+    }
+
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__grid--reverse {
+        flex-direction: row-reverse !important;
+    }
+
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__media-item,
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__text-item {
+        flex: 0 0 50% !important;
+        width: 50% !important;
+        max-width: 50% !important;
+        height: 460px !important;
+    }
+
+    .main-index [id$="__multirow_UUdtmU"] .image-with-text__media img {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+}
+
+/* Featured Stories is always one horizontal carousel, never a wrapping grid. */
+.main-index #shopify-section-template--23416234311918__rich_text_4i9r8Y,
+.main-index #shopify-section-template--23416234311918__178405198409ffe087,
+.main-index #Slide-template--23416234311918__featured_article_hydqEF-1,
+.main-index #Slide-template--23416234311918__featured_article_hydqEF-2 {
+    display: none !important;
+}
+
+.main-index [id$="__featured_article_hydqEF"] .slider-wrapper,
+.main-index [id$="__featured_article_hydqEF"] slider-component {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.main-index [id$="__featured_article_hydqEF"] .blog__posts {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+}
+
+.main-index [id$="__featured_article_hydqEF"] .featured-article-item {
+    box-sizing: border-box !important;
+    flex: 0 0 calc((100% - 16px) / 3) !important;
+    width: calc((100% - 16px) / 3) !important;
+    max-width: calc((100% - 16px) / 3) !important;
+    margin: 0 !important;
+    scroll-snap-align: start;
+}
+
+@media screen and (max-width: 749px) {
+    .main-index [id$="__featured_article_hydqEF"] .featured-article-item {
+        flex-basis: 86% !important;
+        width: 86% !important;
+        max-width: 86% !important;
+    }
+}
+
+/* Product recommendation swatches in captured content pages. The source page
+   loads this rule from Shopify's theme CDN, so keep it local as well. */
+.swatch-with-image,
+.swatch {
+    position: relative;
+    overflow: hidden;
+}
+
+.swatch-with-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: block;
+    background-color: var(--color-grey, #f4f4f4) !important;
+    background-image: var(--swatch--background) !important;
+    background-position: var(--swatch-focal-point, center) !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+}
+
+.smith-youtube-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+}
+
+.smith-youtube-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Bloggle leaves empty product placeholders when its Shopify app script is
+   unavailable on WordPress. Hide only the empty image node. */
+.bloggle_product--img[src=""] {
+    display: none !important;
+}
+
+/* Prices are stored in WooCommerce for purchasing logic, never displayed. */
+.woocommerce-Price-amount,
+.woocommerce-price-suffix,
+.boost-sd__format-currency,
+.boost-sd__cart-subtotal,
+.smith-sticky-price,
+.cart-subtotal,
+.order-total,
+.product-price,
+.product-subtotal,
+.woocommerce-mini-cart__total,
+.woocommerce-checkout-review-order-table .amount,
+.woocommerce-order-details .amount {
+    display: none !important;
+}
+
+.smith-stock-label {
+    display: inline-block !important;
+    color: #18743a;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+/* Keep every collection card aligned regardless of source description length. */
+.smith-source-snapshot .boost-sd__product-short-description,
+.smith-collection-page .smith-product-description {
+  display: -webkit-box !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  overflow: hidden !important;
+  line-height: 21px !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+.smith-product-reviews { max-width: 1200px; margin: 48px auto; padding: 36px 24px; border-top: 1px solid #ddd; text-align: center; }
+.smith-review-summary { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0 18px; font-size: 14px; }
+.smith-review-summary--header { justify-content: flex-start; margin: 4px 0; }
+.smith-rating-stars { display: inline-block; font-size: 20px; line-height: 1; letter-spacing: 1px; color: transparent; background: linear-gradient(90deg, #111 var(--smith-rating), #c8c8c8 var(--smith-rating)); -webkit-background-clip: text; background-clip: text; }
+.smith-review-count { color: #555; text-decoration: none; }
+.smith-review-empty { margin: 0 0 18px; font-style: italic; }
+.smith-review-open,.smith-review-submit { border: 0; background: #151515; color: #fff; padding: 15px 30px; font-weight: 700; cursor: pointer; }
+.smith-review-form { max-width: 720px; margin: 28px auto; padding: 24px; background: #f6f6f4; text-align: left; }
+.smith-review-form fieldset { border: 0; margin: 0 0 18px; padding: 0; }
+.smith-review-form legend,.smith-review-form label { display: block; margin-bottom: 8px; font-weight: 600; }
+.smith-review-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.smith-review-form input[type="text"],.smith-review-form input[type="email"],.smith-review-form textarea { width: 100%; margin-top: 7px; padding: 12px; border: 1px solid #bbb; background: #fff; }
+.smith-rating-input { display: inline-flex; flex-direction: row-reverse; }
+.smith-rating-input input { position: absolute; opacity: 0; }
+.smith-rating-input label { color: #bbb; font-size: 32px; cursor: pointer; margin: 0 2px; }
+.smith-rating-input label:hover,.smith-rating-input label:hover ~ label,.smith-rating-input input:checked ~ label { color: #111; }
+.smith-review-message { margin: 12px 0 0; }
+.smith-review-list { max-width: 900px; margin: 30px auto 0; text-align: left; }
+.smith-review-item { padding: 20px 0; border-top: 1px solid #ddd; }
+.smith-review-item-head { display: flex; justify-content: space-between; gap: 16px; }
+.smith-review-item-stars { letter-spacing: 2px; }
+.smith-review-item time { color: #777; font-size: 12px; }
+.smith-review-item p { margin: 10px 0 0; }
+@media (max-width: 640px) { .smith-review-fields { grid-template-columns: 1fr; } }
+
+/* The local PDP already renders the complete gallery. */
+.product__gallery-view-more {
+    display: none !important;
+}
+
+.smith-buy-now-wrap { margin: 14px 0 18px; }
+.smith-buy-now-button { width: 100%; min-height: 52px; border: 1px solid #151515; background: #151515; color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .06em; cursor: pointer; }
+.smith-buy-now-button:hover { background: #333; }
+.smith-buy-now-button:disabled { opacity: .65; cursor: wait; }
+.header__icons mini-cart { display: none !important; }
+
+/* Floating Smith Vietnam contact widget replaces the inactive Boost back-to-top button. */
+.boost-sd__scroll-to-top { display: none !important; }
+.smith-contact-widget { position: fixed; z-index: 9998; right: 28px; bottom: 28px; font-family: "Plus Jakarta Sans", Arial, sans-serif; }
+.smith-contact-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  background: #151515;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0,0,0,.24), 0 0 0 5px rgba(21,21,21,.08);
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.smith-contact-trigger:hover { background: #2b2b2b; transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 38px rgba(0,0,0,.28), 0 0 0 6px rgba(21,21,21,.08); }
+.smith-contact-trigger svg { width: 27px; height: 27px; }
+.smith-contact-panel {
+  position: absolute;
+  right: 0;
+  bottom: 78px;
+  width: min(420px, calc(100vw - 32px));
+  overflow: hidden;
+  border: 1px solid rgba(21,21,21,.1);
+  border-radius: 20px;
+  background: #fff;
+  color: #151515;
+  box-shadow: 0 28px 80px rgba(0,0,0,.22), 0 4px 18px rgba(0,0,0,.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(.98);
+  transform-origin: right bottom;
+  transition: opacity .22s ease, visibility .22s ease, transform .22s ease;
+}
+.smith-contact-widget.is-open .smith-contact-panel { opacity: 1; visibility: visible; transform: translateY(0); }
+.smith-contact-panel__header { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 24px 24px 23px; background: linear-gradient(135deg,#101010 0%,#252525 100%); color: #fff; }
+.smith-contact-panel__header::after { position: absolute; right: 24px; bottom: 0; left: 24px; height: 1px; background: linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,0)); content: ""; }
+.smith-contact-panel__header div { display: flex; flex-direction: column; gap: 5px; }
+.smith-contact-panel__header span { color: #cfcfcf; font-size: 10px; font-weight: 800; letter-spacing: .18em; }
+.smith-contact-panel__header strong { font-size: 22px; font-weight: 800; line-height: 1.18; letter-spacing: -.025em; }
+.smith-contact-close { display: grid; place-items: center; width: 38px; height: 38px; padding: 0 0 2px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: rgba(255,255,255,.05); color: #fff; font-size: 25px; line-height: 1; cursor: pointer; transition: background .18s ease, transform .18s ease; }
+.smith-contact-close:hover { background: #fff; color: #151515; transform: rotate(6deg); }
+.smith-contact-panel__body { display: grid; gap: 12px; padding: 18px; background: #f3f4f2; }
+.smith-contact-action { position: relative; display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 12px 44px 12px 13px; overflow: hidden; border: 1px solid rgba(21,21,21,.1); border-radius: 14px; background: #fff; color: #151515; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,.025); transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.smith-contact-action::after { position: absolute; right: 18px; top: 50%; content: "→"; font-size: 19px; transform: translateY(-50%); transition: transform .18s ease; }
+.smith-contact-action:hover { border-color: rgba(21,21,21,.45); box-shadow: 0 9px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+.smith-contact-action:hover::after { transform: translate(3px,-50%); }
+.smith-contact-action__icon { display: flex; flex: 0 0 48px; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: #151515; color: #fff; font-size: 20px; font-weight: 800; }
+.smith-contact-action__icon--zalo { border: 0; background: #066aff; color: #fff; font-size: 11px; letter-spacing: -.02em; }
+.smith-contact-action > span:last-child { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+.smith-contact-action small { color: #727272; font-size: 11px; font-weight: 600; }
+.smith-contact-action strong { color: #151515; font-size: 15px; font-weight: 800; line-height: 1.32; overflow-wrap: anywhere; }
+.smith-contact-stores { position: relative; display: grid; gap: 8px; margin-top: 2px; padding: 18px 18px 17px; border: 1px solid rgba(21,21,21,.11); border-radius: 14px; background: linear-gradient(145deg,#fff 0%,#fafafa 100%); color: #151515; text-decoration: none; transition: border-color .18s ease, box-shadow .18s ease; }
+.smith-contact-stores:hover { border-color: #151515; box-shadow: 0 8px 22px rgba(0,0,0,.06); }
+.smith-contact-stores > strong { margin-bottom: 2px; padding-right: 28px; font-size: 16px; font-weight: 800; }
+.smith-contact-stores > strong::after { position: absolute; right: 18px; content: "⌖"; color: #777; font-size: 20px; font-weight: 400; }
+.smith-contact-stores span { color: #656565; font-size: 12px; line-height: 1.55; }
+.smith-contact-stores span b { color: #151515; }
+.smith-contact-stores small { width: fit-content; margin-top: 4px; padding-bottom: 2px; border-bottom: 1px solid #151515; color: #151515; font-size: 11px; font-weight: 800; text-decoration: none; }
+@media (max-width: 600px) {
+  .smith-contact-widget { right: 14px; bottom: 14px; }
+  .smith-contact-trigger { width: 56px; height: 56px; }
+  .smith-contact-panel { right: 0; bottom: 68px; width: min(390px, calc(100vw - 28px)); max-height: calc(100vh - 100px); overflow-y: auto; border-radius: 17px; }
+  .smith-contact-panel__header { padding: 20px; }
+  .smith-contact-panel__body { gap: 10px; padding: 13px; }
+  .smith-contact-action { min-height: 70px; }
+}
+
+.smith-callback-form {
+  margin: 14px 0 18px;
+  padding: 20px;
+  border: 1px solid #d8d8d8;
+  border-radius: 0;
+  background: #f6f6f4;
+  color: #151515;
+}
+.smith-callback-heading {
+  margin: 0 0 16px;
+  color: #151515;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.smith-callback-heading span { margin-right: 5px; }
+.smith-callback-controls { display: flex; align-items: center; gap: 10px; }
+.smith-callback-controls input[type="tel"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+  margin: 0;
+  padding: 0 15px;
+  border: 1px solid #888;
+  border-radius: 0;
+  outline: 0;
+  background: #fff;
+  color: #181818;
+  font: inherit;
+}
+.smith-callback-controls input[type="tel"]:focus { border-color: #151515; box-shadow: inset 0 0 0 1px #151515; }
+.smith-callback-controls input[type="tel"]::placeholder { color: #999; }
+.smith-callback-controls button {
+  flex: 0 0 112px;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #151515;
+  border-radius: 0;
+  background: #151515;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  cursor: pointer;
+}
+.smith-callback-controls button:hover { background: #333; }
+.smith-callback-controls button:disabled { opacity: .65; cursor: wait; }
+.smith-callback-message { min-height: 18px; margin: 10px 0 0; color: #151515; font-size: 13px; line-height: 1.35; }
+.smith-callback-message:empty { display: none; }
+.smith-callback-message.is-success { font-weight: 700; }
+.smith-callback-message.is-error { color: #a20f18; font-weight: 700; }
+.smith-callback-honeypot { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+@media (max-width: 480px) {
+  .smith-callback-form { padding: 18px 16px; }
+  .smith-callback-controls { align-items: stretch; flex-direction: column; }
+  .smith-callback-controls button { flex-basis: 48px; width: 100%; }
+}
+
+/* Unified PDP: keep Top Trending compact and paginate instead of rendering every slide. */
+.smith-unified-pdp .smith-you-may-like-section {
+  margin-top: 64px;
+  padding-top: 32px;
+  min-height: 0;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__recommendation,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__slider,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-slider,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-list,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-list {
+  overflow: hidden !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 16px;
+  left: 0 !important;
+  width: 100% !important;
+  transform: none !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track::before,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track::after {
+  display: none !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-slide {
+  display: none !important;
+  float: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-slide.smith-trending-visible.smith-trending-page-active {
+  display: block !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-item {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Local fallback for recommendation cards. The captured Boost stylesheet can
+   arrive late; keep cards intact and never expose long variant names meanwhile. */
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-item {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image-wrapper,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  background: #f4f4f4;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image-img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+.smith-original-trending .boost-sd__product-info-wrapper,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-info-wrapper {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+/* Universal Boost SD Product Swatches & Options (Collections, Grids, Snapshots, Search) */
+.boost-sd__tooltip-content,
+.boost-sd__radio .boost-sd__tooltip-content,
+.smith-original-trending .boost-sd__tooltip-content {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+.boost-sd__product-swatch {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 6px 0 10px !important;
+}
+.boost-sd__product-swatch-options {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  width: 100% !important;
+  min-height: 38px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.boost-sd__product-swatch-option {
+  flex: 0 0 34px !important;
+  width: 34px !important;
+  max-width: 34px !important;
+  height: 34px !important;
+  max-height: 34px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.boost-sd__radio,
+.boost-sd__tooltip,
+.boost-sd__product-swatch-option .boost-sd__radio,
+.boost-sd__product-swatch-option .boost-sd__tooltip {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.boost-sd__radio-label,
+.boost-sd__product-swatch-option label,
+.boost-sd__radio-label--hide-text,
+.boost-sd__radio-label--circle {
+  display: block !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  flex: 0 0 32px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid #dcdcdc !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #fff !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+}
+.boost-sd__radio-label:hover,
+.boost-sd__product-swatch-option label:hover {
+  border-color: #181818 !important;
+}
+.boost-sd__radio-input:checked + .boost-sd__radio-label,
+.boost-sd__radio-label--selected {
+  border-color: #181818 !important;
+  box-shadow: 0 0 0 1px #181818 !important;
+}
+.boost-sd__product-swatch-more {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  flex: 0 0 32px !important;
+  border-radius: 50% !important;
+  border: 1px solid #181818 !important;
+  background: #fff !important;
+  color: #181818 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+.boost-sd__product-swatch-more:hover {
+  background: #181818 !important;
+  color: #fff !important;
+}
+.boost-sd__product-swatch-more.d-hide {
+  display: none !important;
+}
+.boost-sd__product-swatch-more .text-mobile {
+  display: none !important;
+}
+.boost-sd__product-swatch-more .text-desktop {
+  display: inline !important;
+}
+@media (min-width: 750px) {
+  .boost-sd__product-swatch-more.d-hide,
+  .boost-sd__product-swatch-option.d-hide,
+  .d-hide {
+    display: none !important;
+  }
+}
+@media (max-width: 749px) {
+  .boost-sd__product-swatch-more.m-hide,
+  .boost-sd__product-swatch-option.m-hide,
+  .m-hide {
+    display: none !important;
+  }
+  .boost-sd__product-swatch-more .text-mobile {
+    display: inline !important;
+  }
+  .boost-sd__product-swatch-more .text-desktop {
+    display: none !important;
+  }
+}
+
+/* Trending Slider override (clean 44px circles) */
+.smith-original-trending .boost-sd__radio-input {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+.smith-original-trending .boost-sd__radio::before,
+.smith-original-trending .boost-sd__radio::after,
+.smith-original-trending .boost-sd__tooltip::before,
+.smith-original-trending .boost-sd__tooltip::after,
+.smith-original-trending .boost-sd__radio-label::before,
+.smith-original-trending .boost-sd__radio-label::after {
+  display: none !important;
+  content: none !important;
+}
+.smith-original-trending .boost-sd__product-swatch-options {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.smith-original-trending .boost-sd__product-swatch-option {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  max-width: 44px !important;
+  height: 44px !important;
+  max-height: 44px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.smith-original-trending .boost-sd__product-swatch-option label,
+.smith-original-trending .boost-sd__radio-label {
+  display: block !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  flex: 0 0 44px !important;
+  border-radius: 50% !important;
+  border: 1px solid #dcdcdc !important;
+  background-size: 90% auto !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #fff !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  text-indent: -9999px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+}
+.smith-original-trending .boost-sd__product-swatch-option label:hover,
+.smith-original-trending .boost-sd__product-swatch-option.is-active label,
+.smith-original-trending .boost-sd__radio-input:checked + .boost-sd__radio-label {
+  border-color: #181818 !important;
+}
+.smith-original-trending .boost-sd__product-swatch-more {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  flex: 0 0 44px !important;
+  border-radius: 50% !important;
+  border: 1px solid #181818 !important;
+  background: #fff !important;
+  color: #181818 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+.smith-original-trending .boost-sd__product-swatch-options:has(.boost-sd__product-swatch-more:not(.d-hide):not([style*="display: none"])) .boost-sd__product-swatch-option:nth-of-type(n+4) {
+  display: none !important;
+}
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image-wrapper,
+:is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image {
+  height: 270px !important;
+  min-height: 270px !important;
+}
+@media (max-width: 989px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image-wrapper,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image {
+    height: 220px !important;
+    min-height: 220px !important;
+  }
+}
+@media (max-width: 749px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__slider-container,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__slider-container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track {
+    grid-template-columns: minmax(0, 1fr) !important;
+    min-height: calc(min(92vw, 390px) + 360px) !important;
+    height: auto !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-list,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-slide,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__slide,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    min-height: calc(min(92vw, 390px) + 360px) !important;
+    height: auto !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image-wrapper,
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__product-image {
+    height: min(92vw, 390px) !important;
+    min-height: min(92vw, 390px) !important;
+  }
+}
+@media (max-width: 1199px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__recommendation-title {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: auto !important;
+    min-height: 48px !important;
+    padding: 8px 0 !important;
+    overflow: visible !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .boost-sd__recommendation-title-text {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    text-align: center;
+  }
+}
+@media (min-width: 750px) and (max-width: 1199px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .smith-original-trending .slick-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .image-with-text__content {
+    box-sizing: border-box;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 28px 32px !important;
+    overflow: visible !important;
+    background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.68) 72%, rgba(255,255,255,.18)) !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .image-with-text__content > * {
+    max-width: 100% !important;
+  }
+}
+@media (max-width: 479px) {
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .image-with-text__content {
+    padding: 24px 20px !important;
+    background: rgba(255,255,255,.82) !important;
+  }
+  :is(.smith-product-source-snapshot, .smith-unified-pdp) .image-with-text__heading.type-preset--h1 {
+    font-size: clamp(30px, 9vw, 38px) !important;
+    line-height: 1.08 !important;
+  }
+}
+.smith-buy-now-message { margin: 8px 0 0; color: #b42318; font-size: 13px; }
+.smith-checkout-open { overflow: hidden; }
+.smith-checkout-modal { position: fixed; inset: 0; z-index: 1000000; display: none; }
+.smith-checkout-modal.is-open { display: block; }
+.smith-checkout-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.62); }
+.smith-checkout-dialog { position: absolute; top: 5vh; left: 50%; width: min(650px, calc(100vw - 28px)); max-height: 90vh; display: flex; flex-direction: column; transform: translateX(-50%); color: #f5f5f5; background: #141414; border: 1px solid #383838; border-radius: 18px; box-shadow: 0 20px 70px rgba(0,0,0,.55); overflow: hidden; }
+.smith-checkout-heading { min-height: 58px; padding: 0 16px 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+.smith-checkout-heading strong { font-size: 16px; letter-spacing: .08em; }
+.smith-checkout-close { width: 42px; height: 42px; border: 0; background: transparent; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+.smith-quick-order-body { padding: 18px 28px 28px; overflow-y: auto; }
+.smith-quick-product { display: flex; gap: 16px; padding: 16px; margin-bottom: 20px; border: 1px solid #333; border-radius: 14px; }
+.smith-quick-product-image { width: 72px; height: 72px; object-fit: contain; background: #eee; border-radius: 9px; }
+.smith-quick-product-info { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.smith-quick-product-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #bbb; line-height: 1.4; }
+.smith-quick-product-meta .smith-meta-item { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: #222; border: 1px solid #444; border-radius: 4px; }
+.smith-quick-product-meta strong { color: #fff; font-weight: 600; }
+.smith-quick-product-info > span { padding: 2px 7px; color: #fff; background: #16a34a; font-size: 12px; }
+.smith-quick-quantity { display: flex; align-items: center; gap: 0; margin-top: 4px; }
+.smith-quick-quantity > span { margin-right: 12px; color: #aaa; }
+.smith-quick-quantity button,.smith-quick-quantity input { width: 40px; height: 36px; border: 1px solid #444; color: #fff; background: #0c0c0c; text-align: center; }
+.smith-quick-quantity input { border-left: 0; border-right: 0; }
+.smith-quick-order-form label { display: block; margin-bottom: 15px; color: #eee; font-weight: 600; }
+.smith-quick-order-form em { color: #ff6b6b; font-style: normal; }
+.smith-quick-order-form input,.smith-quick-order-form textarea { width: 100%; margin-top: 7px; padding: 13px 15px; border: 1px solid #555; border-radius: 10px; color: #fff; background: #181818; }
+.smith-quick-order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.smith-quick-cod { display: flex; gap: 12px; padding: 16px; margin: 5px 0 18px; border: 1px solid #333; border-radius: 12px; }
+.smith-quick-cod strong,.smith-quick-cod small { display: block; }
+.smith-quick-cod small { margin-top: 5px; color: #aaa; }
+.smith-quick-phone-notice { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; margin: 5px 0 18px; border: 1px solid #9dc9ff; border-radius: 11px; color: #172033; background: #eaf3ff; }
+.smith-quick-phone-notice > span { flex: 0 0 22px; width: 22px; height: 22px; margin-top: 1px; border-radius: 2px; color: #fff; background: #438fc8; font-weight: 800; text-align: center; line-height: 22px; }
+.smith-quick-phone-notice p { margin: 0; font-size: 14px; line-height: 1.55; }
+.smith-quick-phone-notice strong { font-weight: 800; }
+.smith-quick-order-submit,.smith-quick-order-done { width: 100%; padding: 15px; border: 0; color: #111; background: #fff; font-weight: 800; cursor: pointer; }
+.smith-quick-order-message { margin: 10px 0 0; color: #ff8888; }
+.smith-quick-order-success { padding: 36px 10px; text-align: center; }
+.smith-quick-order-success strong { font-size: 20px; color: #72df91; }
+.smith-quick-order-success p { margin: 14px 0 24px; }
+@media (max-width: 700px) { .smith-checkout-dialog { top: 0; width: 100vw; max-height: 100vh; height: 100vh; border-radius: 0; } .smith-quick-order-body { padding: 16px; } .smith-quick-order-grid { grid-template-columns: 1fr; gap: 0; } }
+.smith-size-open { overflow: hidden; }
+.smith-size-modal { position: fixed; inset: 0; z-index: 1000001; display: none; }
+.smith-size-modal.is-open { display: block; }
+.smith-size-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+.smith-size-dialog { position: absolute; top: 50%; left: 50%; width: min(560px, calc(100vw - 28px)); max-height: 88vh; transform: translate(-50%,-50%); background: #fff; color: #111; box-shadow: 0 20px 70px rgba(0,0,0,.35); overflow: auto; }
+.smith-size-heading { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid #ddd; }
+.smith-size-heading strong { font-size: 18px; letter-spacing: .05em; }
+.smith-size-heading button { width: 38px; height: 38px; border: 0; background: transparent; font-size: 30px; cursor: pointer; }
+.smith-size-content { padding: 22px; }
+.smith-size-content p { margin: 0 0 18px; line-height: 1.6; }
+.smith-size-content table { width: 100%; border-collapse: collapse; }
+.smith-size-content th,.smith-size-content td { padding: 12px; border: 1px solid #ccc; text-align: left; }
+.smith-size-content th { background: #f1f1ef; }
+/* Prevent captured English filter/sort copy from painting before localization. */
+.smith-source-snapshot:not(.smith-catalog-localized) .boost-sd__filter-tree,
+.smith-source-snapshot:not(.smith-catalog-localized) .boost-sd__toolbar-container,
+.smith-source-snapshot:not(.smith-catalog-localized) .boost-sd__product-count{visibility:hidden}
+
+@media (max-width: 767px) {
+  .smith-source-snapshot.smith-mobile-filter-ready:not(.smith-mobile-filter-open) .boost-sd__filter-tree-vertical {
+    display: none !important;
+  }
+  .smith-source-snapshot.smith-mobile-filter-ready.smith-mobile-filter-open .boost-sd__filter-tree-vertical {
+    display: block !important;
+  }
+}
+
+/* Keep horizontally scrollable snapshot carousels from widening the mobile page. */
+@media (max-width: 749px) {
+  .smith-page-source-snapshot {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}
+
+/* Mobile drawer: captured desktop rules gave each top-level item 100vh,
+   creating several screens of empty space between menu labels. */
+@media (max-width: 1199px) {
+  body.overflow-hidden-tablet,
+  body.overflow-hidden-mobile {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+  #Details-menu-drawer-container[open] > #menu-drawer {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    z-index: 9999 !important;
+    overflow: hidden !important;
+  }
+  #Details-menu-drawer-container[open] > #menu-drawer > .menu-drawer__drawer-header {
+    flex: 0 0 auto !important;
+  }
+  #Details-menu-drawer-container[open] > #menu-drawer > .menu-drawer__inner-container {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: calc(100dvh - 52px) !important;
+    max-height: calc(100dvh - 52px) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  #menu-drawer .menu-drawer__navigation-container {
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    padding-bottom: max(3.5rem, env(safe-area-inset-bottom, 2.5rem)) !important;
+  }
+  #menu-drawer .menu-drawer__submenu {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    bottom: 0 !important;
+    background-color: rgb(var(--color-background)) !important;
+    z-index: 2 !important;
+    overflow: hidden !important;
+  }
+  #menu-drawer .menu-drawer__inner-submenu {
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #menu-drawer .menu-drawer__close-button {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 5 !important;
+    background-color: rgb(var(--color-background)) !important;
+    flex: 0 0 auto !important;
+    margin-top: 0 !important;
+  }
+  #menu-drawer .menu-drawer__submenu .menu-drawer__menu {
+    flex: 1 1 auto !important;
+    overflow-y: visible !important;
+    padding-bottom: max(3.5rem, env(safe-area-inset-bottom, 2.5rem)) !important;
+  }
+  #menu-drawer .menu-drawer__navigation {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  #menu-drawer .menu-drawer__menu > li,
+  #menu-drawer .menu-drawer__menu > li > details {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  #menu-drawer .menu-drawer__menu > li > a,
+  #menu-drawer .menu-drawer__menu > li > details > summary,
+  #menu-drawer .menu-drawer__menu > li > .menu-drawer__menu-item {
+    height: auto !important;
+    min-height: 48px;
+  }
+  #menu-drawer .localization-selection-link.menu-drawer__menu-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100%;
+    color: rgb(var(--color-foreground)) !important;
+  }
+  #menu-drawer .localization-selection-link .text {
+    display: inline-block !important;
+    color: inherit !important;
+    font-weight: 600;
+  }
+  #menu-drawer .smith-mobile-menu-level-2 {
+    font-family: var(--font-heading-family) !important;
+    font-weight: 700;
+    background: rgba(var(--color-foreground), .035);
+  }
+}
+

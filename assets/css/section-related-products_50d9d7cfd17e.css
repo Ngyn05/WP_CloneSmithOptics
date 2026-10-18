@@ -1,0 +1,11 @@
+.related-products {
+  display: block;
+
+  .card__heading a {
+    height: unset;
+  }
+}
+
+.related-products__heading {
+  margin: 0 0 3rem;
+}

@@ -1,0 +1,29 @@
+.breadcrumbs__list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.breadcrumbs__item {
+  display: inline-block;
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: var(--font-weight-light);
+}
+
+.breadcrumbs__item:not(:last-child):after {
+  content: '/';
+  display: inline-block;
+  margin: 0;
+}
+
+.breadcrumbs__link {
+  transition: text-decoration .18s ease;
+  text-decoration-color: transparent;
+}
+
+a[href].breadcrumbs__link:hover {
+  text-decoration: underline;
+}

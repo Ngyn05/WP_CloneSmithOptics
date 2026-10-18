@@ -1,0 +1,21 @@
+.static-image-text-slider slideshow-component,
+.static-image-text-slider .slideshow {
+  height: 100%;
+}
+
+.static-image-text-slider .slideshow__slide {
+  width: 100%;
+}
+
+.static-image-text-slider .image-with-text__content {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.static-image-text-slider .image-with-text-slider--slider-controls-arrows {
+  position: absolute;
+}
+
+.static-image-text-slider.image-with-text-slider.arrows-on-tiles .slider-button.tile-arrow {
+  display: block;
+}

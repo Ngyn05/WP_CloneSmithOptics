@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(){initAccordionToggles()});function initAccordionToggles(){document.querySelectorAll(".accordion-toggle").forEach(toggle=>{toggle.removeEventListener("click",toggleAccordion),toggle.addEventListener("click",toggleAccordion)})}function toggleAccordion(event){this.classList.toggle("active")}document.addEventListener("reinit-accordions",()=>{initAccordionToggles()});
+//# sourceMappingURL=/cdn/shop/t/401/assets/accordion.js.map?v=9846094838337070251788382342

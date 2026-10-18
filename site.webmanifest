@@ -1,0 +1,17 @@
+{
+  "name": "SmithOptics VN",
+  "short_name": "Smith VN",
+  "lang": "vi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "assets/images/favicon-smith-vn.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
